@@ -1,0 +1,54 @@
+// Default font-size = 16px
+
+// Head
+
+// FONTS WEIGHT
+
+$extra-bold: 800;
+$bold: 700;
+$semi-bold: 600;
+$medium: 500;
+$regular: 400;
+$light: 300;
+$extra-light: 200;
+
+.extra-bold {
+    font-weight: 800;
+}
+.bold {
+    font-weight: 700;
+}
+.semi-bold {
+    font-weight: 600;
+}
+.medium {
+    font-weight: 500;
+}
+.regular {
+    font-weight: 400;
+}
+.light {
+    font-weight: 300;
+}
+.extra-light {
+    font-weight: 200;
+}
+// MONSERAT
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+$Roboto: "Roboto", sans-serif;
+.Roboto {
+    font-family: "Roboto", sans-serif;
+}
+
+p,a{
+    font-size: calc(12px + 0.21vw) !important;
+    font-family: "Roboto", sans-serif;
+    line-height: 21px;
+    letter-spacing: 0px;
+    text-decoration: none;
+}
+h1{
+    line-height:58px;
+    font-size: calc(12px + 2vw) !important;
+}

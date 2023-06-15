@@ -1,0 +1,85 @@
+
+
+/* Hide submenu by default */
+ul.sub-menu {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: auto;
+    background-color: #f9f9f9;
+    z-index: 999;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px);
+}
+
+/* Show submenu on hover */
+li.menu-item-has-children:hover > ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    width: max-content;
+    margin-right: 0px;
+    // box-shadow: 0 2px 5px 0 rgba(0,0,0,.28);
+    li {
+        padding: 15px 30px;
+        // width: max-content;
+        margin-right: 0px;
+    }
+}
+
+/* Position submenu below parent menu item */
+li.menu-item-has-children {
+    position: relative;
+    ul.sub-menu {
+        li {
+            margin-right: 0px !important;
+        }
+    }
+}
+
+/* Style for the second-level submenu */
+ul.sub-menu li.menu-item-has-children:hover > ul.sub-menu {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #f9f9f9;
+    z-index: 999;
+    opacity: 0;
+    width: max-content;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-10px);
+    li {
+        padding: 15px 30px;
+    }
+}
+
+/* Show second-level submenu on hover */
+ul.sub-menu li.menu-item-has-children:hover ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+ul.sub-menu ul.sub-menu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: max-content;
+    background-color: #f9f9f9;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-10px);
+}
+
+/* Show third-level submenu on hover */
+ul.sub-menu li.menu-item-has-children:hover > ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}

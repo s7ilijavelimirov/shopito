@@ -1,0 +1,62 @@
+div#carouselExampleFade {
+    padding-top: 120px;
+    .slider-item-container {
+        position: relative;
+    }
+
+    .slider-text {
+        position: absolute;
+        top: 35%;
+        left: 27%;
+        transform: translate(-50%, -50%);
+        text-align: left;
+        img {
+            margin-bottom: 54px;
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+        h1 {
+            margin-bottom: 33px;
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            animation-delay: 1s;
+        }
+        p {
+            font-size: 20px !important;
+            opacity: 0;
+            animation: slideIn 0.5s ease forwards;
+            animation-delay: 1.5s;
+        }
+    }
+    .container-fluid {
+        background-color: $unnamed-color-cab1ca;
+        .boxes {
+            p {
+                padding: 11px 0px;
+                color: white;
+                letter-spacing: 0px;
+                color: #ffffff;
+                opacity: 1;
+                line-height: 19px;
+                font-weight: $regular;
+                a {
+                    color: white;
+                    text-decoration: none;
+                }
+                b {
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .carousel-indicators {
+        bottom: 50px;
+    }
+    .carousel-indicators [data-bs-target] {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid #cab1ca;
+    }
+}

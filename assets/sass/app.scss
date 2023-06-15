@@ -1,0 +1,109 @@
+/* 
+  USING CSS LIBRARY  LOCALY
+*/
+// @import "vendors/materialize/materialize";
+
+/* 
+ USING LIBRARY FROM NODE_MODULES
+ !NOTICE -  register js into /functions/theme/theme-script.php file
+
+ @import "./bootstrap/variables";
+ @import "node_modules/bootstrap/scss/bootstrap";
+*/
+
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+
+@import "base/reset";
+@import "base/typography";
+
+@import "layout/navigation";
+@import "layout/grid";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/sidebar";
+@import "layout/navigation_mobile";
+@import "layout/blog";
+@import "layout/responsive";
+@import "components/buttons";
+@import "layout/input";
+@import "components/slider";
+@import "components/gallery";
+@import "pages/home";
+@import "pages/contact";
+@import "pages/post";
+@import "layout/woocommerce";
+
+.logo-img.d-flex.justify-content-start {
+  ul {
+    display: flex;
+  }
+}
+
+@media (min-width: 1700px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1640px;
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mybody {
+  padding-top: calc(140px + 1vh);
+}
+.home {
+  padding-top: 0px !important;
+}
+
+body {
+  transition: transform 0.3s ease; /* Animacija pomeranja sajta */
+  transform: translateX(0); /* Početno pomeranje */
+  overflow-x: hidden;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  position: relative; /* Dodajte relativnu poziciju na body element */
+}
+body.open {
+  transform: translateX(-600px);
+}
+
+body.open::before {
+  background-color: rgba(0, 0, 0, 0.5); /* Promenite boju preliva po želji */
+}
+
+body.color-change {
+  background-color: #f0f0f0; /* Promenite željenu boju pozadine */
+}
+
+body.color-change::before {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99999999999999999;
+}
+
+.mini-cart.open {
+  right: 0; /* Pozicija prikaza */
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //background-color: silver;
+  transition: background-color 0.3s ease;
+  z-index: -1; /* Postavite niži z-index kako bi bio ispod sadržaja */
+}

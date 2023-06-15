@@ -1,0 +1,46 @@
+{
+  "name": "s7_wordpress_theme_boilerplate",
+  "version": "1.0.0",
+  "description": "S7 design wordpress theme boilerplate",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "webpack --mode development",
+    "dev": "webpack --watch --mode development",
+    "production": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/s7web/s7_wordpress_theme_boilerplate.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/s7web/s7_wordpress_theme_boilerplate/issues"
+  },
+  "homepage": "https://github.com/s7web/s7_wordpress_theme_boilerplate#readme",
+  "devDependencies": {
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.16.7",
+    "@babel/preset-env": "^7.11.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "purgecss-webpack-plugin": "^2.3.0",
+    "sass-loader": "^8.0.2",
+    "uglifyjs-webpack-plugin": "^2.2.0"
+  },
+  "dependencies": {
+    "bootstrap": "^5.2.2",
+    "glob-all": "^3.2.1",
+    "rough-notation": "^0.5.1",
+    "swiper": "^8.3.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12"
+  }
+}
