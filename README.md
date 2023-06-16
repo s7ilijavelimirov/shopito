@@ -98,29 +98,3 @@
   *  Dashboard:  ``` /functions/admin/admin-script.php```
 
 ##################################################
-
-
-
-## Nav Walekr menu
- Help us with a means to traverse tree-like data structures for the purpose of rendering HTML.
-
-Register Naw Walker menu in file: ```/inc/class-wp-bootstrap-navwalker.php```
-
-Bootstrap 5.0.2
-Popper.js 2.9.2
-Fontawesome 6.0.0
-
-***Call wp_nav_menu() and pass it a new instance of the custom Walker child class.***
-```
-wp_nav_menu( array(
-    'theme_location'  => 'primary',
-    'depth'           => 2, // 1 = no dropdowns, 2 = with dropdowns.
-    'container'       => 'div',
-    'container_class' => 'collapse navbar-collapse',
-    'container_id'    => 'bs-example-navbar-collapse-1',
-    'menu_class'      => 'navbar-nav mr-auto',
-    'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-    'walker'          => new WP_Bootstrap_Navwalker(),
-) ); -->
-```
-Enabled theme support for features Menu, Title tag, Post thumbnails, 
