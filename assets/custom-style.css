@@ -1,0 +1,78 @@
+/* CSS for big screens (laptops) */
+.custom-product-slider {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .custom-product-slider-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    white-space: nowrap;
+  }
+  
+  .custom-product-item {
+    flex: 0 0 20%; /* Adjust this value based on the number of visible items per row (e.g., 20% for 5 items) */
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .custom-product-item a {
+    text-decoration: none;
+  }
+  
+  .custom-product-item a .product-gallery .product-gallery-images .product-gallery-image img {
+    width: 100% !important;
+    height: auto !important;
+  }
+  
+  .custom-product-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .product-brand {
+    /* Add styling for the product brand */
+  }
+  
+  .product-title {
+    /* Add styling for the product title */
+  }
+  
+  .product-price {
+    /* Add styling for the product price */
+  }
+  
+  .custom-product-slider-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .custom-product-slider-controls button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .custom-product-slider-controls .custom-product-slider-prev {
+    margin-left: 20px;
+  }
+  
+  .custom-product-slider-controls .custom-product-slider-next {
+    margin-right: 20px;
+  }
+  
+  /* CSS for mobile devices */
+  @media (max-width: 767px) {
+    .custom-product-item {
+      flex: 0 0 100%;
+    }
+  }
