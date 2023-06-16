@@ -127,6 +127,22 @@ function custom_product_slider_shortcode($atts)
             ?>
                 <div class="custom-product-item">
                     <a href="<?php echo esc_url($permalink); ?>">
+                    <?php
+                            $product_id = $product->ID;
+                            $brands = wp_get_post_terms($product_id, 'pwb-brand');
+
+                            if (!empty($brands) && !is_wp_error($brands)) {
+                                echo '<div class="product-brand text-center">';
+                                foreach ($brands as $brand) {
+                                    $brand_logo_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
+                                    $brand_logo = wp_get_attachment_image($brand_logo_id, 'thumbnail');
+                                    if (!empty($brand_logo)) {
+                                        echo $brand_logo;
+                                    }
+                                }
+                                echo '</div>';
+                            }
+                            ?>
                         <?php echo custom_shop_product_gallery1($product, 'product-gallery-' . $product->ID); ?>
                         <div class="product-details">
                             <h4 class="product-title"><?php echo $title; ?></h4>
@@ -145,22 +161,6 @@ function custom_product_slider_shortcode($atts)
                             }
 
                             echo $price_html;
-                            ?>
-                            <?php
-                            $product_id = $product->ID;
-                            $brands = wp_get_post_terms($product_id, 'pwb-brand');
-
-                            if (!empty($brands) && !is_wp_error($brands)) {
-                                echo '<div class="product-brand">';
-                                foreach ($brands as $brand) {
-                                    $brand_logo_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
-                                    $brand_logo = wp_get_attachment_image($brand_logo_id, 'thumbnail');
-                                    if (!empty($brand_logo)) {
-                                        echo $brand_logo;
-                                    }
-                                }
-                                echo '</div>';
-                            }
                             ?>
                         </div>
                     </a>

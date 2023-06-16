@@ -8,17 +8,26 @@
     display: flex;
     transition: transform 0.5s ease;
     width: 100%;
-    white-space: nowrap;
+    align-items: stretch;
   }
   
   .custom-product-item {
     flex: 0 0 20%; /* Adjust this value based on the number of visible items per row (e.g., 20% for 5 items) */
-    padding: 10px;
+    padding: 5px;
     box-sizing: border-box;
+    display: flex;
   }
   
   .custom-product-item a {
     text-decoration: none;
+    background-color:#F0EFEF !important;
+    display: block;
+    border-radius: 10px;
+    padding:35px 0px;
+  }
+  .custom-product-item a .product-gallery .product-gallery-images{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   
   .custom-product-item a .product-gallery .product-gallery-images .product-gallery-image img {

@@ -224,7 +224,7 @@ function custom_product_slider_settings_page()
 
                             echo '<h1>Izabrani proizvodi za slider</h1>';
                             echo '<div style="display: flex; border: 1px solid silver; padding: 30px; background: white; flex-wrap: wrap;">';
-                           
+
                             foreach ($selected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -243,7 +243,7 @@ function custom_product_slider_settings_page()
 
                             echo '<h1>Ubacite proizvod u slider</h1>';
                             echo '<div style="display: flex; border: 1px solid silver; padding: 30px; background: white; flex-wrap: wrap;overflow-y: auto; max-height: 200px;">';
-                           
+
                             foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -326,7 +326,7 @@ function custom_product_slider_settings_page()
 
                             echo '<h1>Izabrani proizvodi za slider</h1>';
                             echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
-                           
+
                             foreach ($selected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -345,7 +345,7 @@ function custom_product_slider_settings_page()
 
                             echo '<h1>Ubacite proizvod u slider</h1>';
                             echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap; overflow-y: auto; max-height: 200px;">';
-                          
+
                             foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -428,7 +428,7 @@ function custom_product_slider_settings_page()
 
                             echo '<h1>Izabrani proizvodi za slider</h1>';
                             echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
-                           
+
                             foreach ($selected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -448,7 +448,7 @@ function custom_product_slider_settings_page()
                             // Display the remaining unselected products
                             echo '<h1>Ubacite proizvod u slider</h1>';
                             echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
-                          
+
                             foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
@@ -471,6 +471,32 @@ function custom_product_slider_settings_page()
                             echo 'Nema selektovane kategorije.';
                         }
                         ?>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th scope="row">Premium Slider Settings:</th>
+                    <td>
+                        <label for="product_order_premium">Redosled prikaza proizvoda:</label><br>
+                        <label>
+                            <input type="radio" name="product_order_premium" value="price" <?php checked($product_order_premium, 'price'); ?>>
+                            Po ceni
+                        </label><br>
+                        <label>
+                            <input type="radio" name="product_order_premium" value="title" <?php checked($product_order_premium, 'title'); ?>>
+                            Po abecedi
+                        </label><br>
+                        <label>
+                            <input type="radio" name="product_order_premium" value="random" <?php checked($product_order_premium, 'random'); ?>>
+                            Nasumično
+                        </label><br>
+                        <label>
+                            <input type="radio" name="product_order_premium" value="newest" <?php checked($product_order_premium, 'newest'); ?>>
+                            Najnovije
+                        </label><br>
+                        <label>
+                            <input type="radio" name="product_order_premium" value="oldest" <?php checked($product_order_premium, 'oldest'); ?>>
+                            Najstarije
+                        </label>
                     </td>
                 </tr>
                 <tr valign="top">
