@@ -207,12 +207,44 @@ function custom_product_slider_settings_page()
                                 'post__in' => $selected_product_ids_premium,
                             ));
 
-                            // Display the selected products
-                            echo '<div style="display: flex; border: 1px solid silver; padding: 30px; background: white; flex-wrap: wrap;">';
+                            // Store selected and unselected products
+                            $selected_products = array();
+                            $unselected_products = array();
 
                             while ($premium_slider_query->have_posts()) {
                                 $premium_slider_query->the_post();
                                 $product_id = get_the_ID();
+
+                                if (in_array($product_id, (array) $selected_product_ids)) {
+                                    $selected_products[] = $product_id;
+                                } else {
+                                    $unselected_products[] = $product_id;
+                                }
+                            }
+
+                            echo '<h1>Izabrani proizvodi za slider</h1>';
+                            echo '<div style="display: flex; border: 1px solid silver; padding: 30px; background: white; flex-wrap: wrap;">';
+                           
+                            foreach ($selected_products as $product_id) {
+                                $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
+
+                                echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px; position:relative;">';
+                                echo '<div style="width: 60px; height: 60px; margin:0 auto; display: block;">';
+                                echo get_the_post_thumbnail($product_id, array(50, 50), array('style' => 'width: 50px; height: 50px; display:block;overflow: visible;'));
+                                echo '</div>';
+                                echo '<div style="text-align:center;">' . get_the_title($product_id) . '</div>';
+                                echo '<div style="position: absolute;top: 0px;right: 0px;">';
+                                echo '<input type="checkbox" name="selected_products_premium[]" value="' . esc_attr($product_id) . '" ' . $checked . '>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+
+                            echo '</div>';
+
+                            echo '<h1>Ubacite proizvod u slider</h1>';
+                            echo '<div style="display: flex; border: 1px solid silver; padding: 30px; background: white; flex-wrap: wrap;overflow-y: auto; max-height: 200px;">';
+                           
+                            foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
                                 echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px; position:relative;">';
@@ -275,14 +307,46 @@ function custom_product_slider_settings_page()
                                 'post_type' => 'product',
                                 'posts_per_page' => -1, // Retrieve all posts
                                 'post__in' => $selected_product_ids_akcije,
-
                             ));
 
-                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
+                            // Store selected and unselected products
+                            $selected_products = array();
+                            $unselected_products = array();
 
                             while ($akcije_slider_query->have_posts()) {
                                 $akcije_slider_query->the_post();
                                 $product_id = get_the_ID();
+
+                                if (in_array($product_id, (array) $selected_product_ids)) {
+                                    $selected_products[] = $product_id;
+                                } else {
+                                    $unselected_products[] = $product_id;
+                                }
+                            }
+
+                            echo '<h1>Izabrani proizvodi za slider</h1>';
+                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
+                           
+                            foreach ($selected_products as $product_id) {
+                                $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
+
+                                echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px;position:relative;">';
+                                echo '<div style="width: 60px; height: 60px; margin:0 auto; display: block;">';
+                                echo get_the_post_thumbnail($product_id, array(50, 50), array('style' => 'width: 50px; height: 50px;display:block;overflow: visible;'));
+                                echo '</div>';
+                                echo '<div style="text-align:center;">' . get_the_title($product_id) . '</div>';
+                                echo '<div style="position: absolute;top: 0px;right: 0px;">';
+                                echo '<input type="checkbox" name="selected_products_akcije[]" value="' . esc_attr($product_id) . '" ' . $checked . '>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+
+                            echo '</div>';
+
+                            echo '<h1>Ubacite proizvod u slider</h1>';
+                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap; overflow-y: auto; max-height: 200px;">';
+                          
+                            foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
                                 echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px;position:relative;">';
@@ -308,9 +372,7 @@ function custom_product_slider_settings_page()
                 </tr>
                 <tr valign="top">
                     <th scope="row">Outlet Slider Categories:</th>
-
                     <td>
-
                         <?php foreach ($categories as $category) : ?>
                             <label>
                                 <input type="checkbox" name="selected_categories_outlet[]" value="<?php echo esc_attr($category->term_id); ?>" <?php checked(in_array($category->term_id, $selected_categories_outlet)); ?>>
@@ -347,14 +409,47 @@ function custom_product_slider_settings_page()
                                 'post_type' => 'product',
                                 'posts_per_page' => -1, // Retrieve all posts
                                 'post__in' => $selected_product_ids_outlet,
-
                             ));
 
-                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
+                            // Store selected and unselected products
+                            $selected_products = array();
+                            $unselected_products = array();
 
                             while ($outlet_slider_query->have_posts()) {
                                 $outlet_slider_query->the_post();
                                 $product_id = get_the_ID();
+
+                                if (in_array($product_id, (array) $selected_product_ids)) {
+                                    $selected_products[] = $product_id;
+                                } else {
+                                    $unselected_products[] = $product_id;
+                                }
+                            }
+
+                            echo '<h1>Izabrani proizvodi za slider</h1>';
+                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
+                           
+                            foreach ($selected_products as $product_id) {
+                                $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
+
+                                echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px;position:relative;">';
+                                echo '<div style="width: 60px; height: 60px; margin:0 auto; display: block;">';
+                                echo get_the_post_thumbnail($product_id, array(50, 50), array('style' => 'width: 50px; height: 50px;display:block;overflow: visible;'));
+                                echo '</div>';
+                                echo '<div style="text-align:center;">' . get_the_title($product_id) . '</div>';
+                                echo '<div style="position: absolute;top: 0px;right: 0px;">';
+                                echo '<input type="checkbox" name="selected_products_outlet[]" value="' . esc_attr($product_id) . '" ' . $checked . '>';
+                                echo '</div>';
+                                echo '</div>';
+                            }
+
+                            echo '</div>';
+
+                            // Display the remaining unselected products
+                            echo '<h1>Ubacite proizvod u slider</h1>';
+                            echo '<div style="display: flex; border:1px solid silver; padding:30px; background:white; flex-wrap: wrap;">';
+                          
+                            foreach ($unselected_products as $product_id) {
                                 $checked = in_array($product_id, (array) $selected_product_ids) ? 'checked' : '';
 
                                 echo '<div style="width: 120px; margin-right: 10px; margin-bottom: 10px;position:relative;">';
@@ -376,32 +471,6 @@ function custom_product_slider_settings_page()
                             echo 'Nema selektovane kategorije.';
                         }
                         ?>
-                    </td>
-                </tr>
-                <tr valign="top">
-                    <th scope="row">Premium Slider Settings:</th>
-                    <td>
-                        <label for="product_order_premium">Redosled prikaza proizvoda:</label><br>
-                        <label>
-                            <input type="radio" name="product_order_premium" value="price" <?php checked($product_order_premium, 'price'); ?>>
-                            Po ceni
-                        </label><br>
-                        <label>
-                            <input type="radio" name="product_order_premium" value="title" <?php checked($product_order_premium, 'title'); ?>>
-                            Po abecedi
-                        </label><br>
-                        <label>
-                            <input type="radio" name="product_order_premium" value="random" <?php checked($product_order_premium, 'random'); ?>>
-                            Nasumično
-                        </label><br>
-                        <label>
-                            <input type="radio" name="product_order_premium" value="newest" <?php checked($product_order_premium, 'newest'); ?>>
-                            Najnovije
-                        </label><br>
-                        <label>
-                            <input type="radio" name="product_order_premium" value="oldest" <?php checked($product_order_premium, 'oldest'); ?>>
-                            Najstarije
-                        </label>
                     </td>
                 </tr>
                 <tr valign="top">
