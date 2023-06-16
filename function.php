@@ -166,9 +166,9 @@ function custom_product_slider_settings_page()
         <h1>Slider Product Settings</h1>
         <form method="post" action="">
             <table class="form-table">
-                <tr valign="top">
-                    <th scope="row">Premium Slider Categories:</th>
-                    <td>
+                <tr>
+                    <td style="width:20%;vertical-align: top;"><h4>Premium Slider Categories:</h4><br>
+
                         <?php foreach ($categories as $category) : ?>
                             <label>
                                 <input type="checkbox" name="selected_categories_premium[]" value="<?php echo esc_attr($category->term_id); ?>" <?php checked(in_array($category->term_id, (array) $selected_categories_premium)); ?>>
@@ -176,7 +176,7 @@ function custom_product_slider_settings_page()
                             </label><br>
                         <?php endforeach; ?>
                     </td>
-                    <td>
+                    <td style="width:80%;">
                         <h4><b>NAPOMENA</b>: Koristite sledeći kratki kod da biste prikazali Premium klizač na svojoj stranici ili objavi</h4>
                         <p style="color:red;">[custom_product_slider category="premium"]</p>
                         <h4>Selektovani proizvodi koji ce se ispisati u slajderu. Ako nema nijednog chekiranog bice ispisani svi, ukoliko chekirate neke ti ce biti ispisani.</h4>
@@ -268,9 +268,9 @@ function custom_product_slider_settings_page()
                         ?>
                     </td>
                 </tr>
-                <tr valign="top">
-                    <th scope="row">Akcije Slider Categories:</th>
-                    <td>
+                <tr>
+                    <td style="width:20%;vertical-align: top;"><h4>Akcije Slider Categories:</h4><br>
+                    
                         <?php foreach ($categories as $category) : ?>
                             <label>
                                 <input type="checkbox" name="selected_categories_akcije[]" value="<?php echo esc_attr($category->term_id); ?>" <?php checked(in_array($category->term_id, $selected_categories_akcije)); ?>>
@@ -278,7 +278,7 @@ function custom_product_slider_settings_page()
                             </label><br>
                         <?php endforeach; ?>
                     </td>
-                    <td>
+                    <td style="width:80%;">
                         <h4><b>NAPOMENA:</b> Koristite sledeći kratki kod da biste prikazali klizač Akcije na svojoj stranici ili objavi</h4>
                         <p style="color:red;">[custom_product_slider category="akcije"]</p>
                         <h4>Selektovani proizvodi koji ce se ispisati u slajderu. Ako nema nijednog chekiranog bice ispisani svi, ukoliko chekirate neke ti ce biti ispisani.</h4>
@@ -370,9 +370,9 @@ function custom_product_slider_settings_page()
                         ?>
                     </td>
                 </tr>
-                <tr valign="top">
-                    <th scope="row">Outlet Slider Categories:</th>
-                    <td>
+                <tr>
+                    <td style="width:20%;vertical-align: top;"><h4>Outlet Slider Categories:</h4><br>
+                   
                         <?php foreach ($categories as $category) : ?>
                             <label>
                                 <input type="checkbox" name="selected_categories_outlet[]" value="<?php echo esc_attr($category->term_id); ?>" <?php checked(in_array($category->term_id, $selected_categories_outlet)); ?>>
@@ -380,7 +380,7 @@ function custom_product_slider_settings_page()
                             </label><br>
                         <?php endforeach; ?>
                     </td>
-                    <td>
+                    <td style="width:80%;">
                         <h4><b>NAPOMENA:</b> Koristite sledeći kratki kod da biste prikazali klizač za izlaz na vašoj stranici ili objavi</h4>
                         <p style="color:red;">[custom_product_slider category="outlet"]</p>
                         <h4>Selektovani proizvodi koji ce se ispisati u slajderu. Ako nema nijednog chekiranog bice ispisani svi, ukoliko chekirate neke ti ce biti ispisani.</h4>
