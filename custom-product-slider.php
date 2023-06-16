@@ -133,19 +133,18 @@ function custom_product_slider_shortcode($atts)
                             <?php
                             if ($sale_price) {
                                 $regular_price_html = '<del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>' . $regular_price . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span></del>';
-                                $sale_price_html = '<ins><span class="woocommerce-Price-amount amount"><bdi>' . $sale_price . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span></ins>';
+                                $sale_price_html = '<ins><span class="woocommerce-Price-amount amount"><bdi>' . wc_price($sale_price) . '</bdi></span></ins>';
                                 $price_html = '<p class="price">' . $regular_price_html . ' ' . $sale_price_html . '</p>';
                             } else {
                                 if ($regular_price === '0.00') {
-                                    $price_html = '<p class="price">' . $regular_price . ' ' . $currency_symbol . '</p>';
+                                    $price_html = '<p class="price">' . $regular_price . '&nbsp;' . $currency_symbol . '</p>';
                                 } else {
-                                    $regular_price_html = '<span class="woocommerce-Price-amount amount"><bdi>' . $regular_price . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span>';
+                                    $regular_price_html = '<span class="woocommerce-Price-amount amount"><bdi>' . wc_price($regular_price) . '</bdi></span>';
                                     $price_html = '<p class="price">' . $regular_price_html . '</p>';
                                 }
                             }
 
                             echo $price_html;
-
                             ?>
                             <?php
                             $product_id = $product->ID;
