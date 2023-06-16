@@ -11,7 +11,7 @@ use Automattic\WooCommerce\Admin\RemoteInboxNotifications\Transformers\Count;
 use Automattic\WooCommerce\StoreApi\Routes\V1\CartItems;
 
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" <?php language_attributes(); ?>> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" <?php language_attributes(); ?>> <![endif]-->
@@ -23,16 +23,19 @@ use Automattic\WooCommerce\StoreApi\Routes\V1\CartItems;
 	<!--=== META TAGS ===-->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta charset="<?php bloginfo('charset'); ?>" />
+	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="author" content="Name">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- <script>import { annotate } from 'rough-notation';</script> -->
+
 	<!--=== LINK TAGS ===-->
-	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS2 Feed" href="<?php bloginfo('rss2_url'); ?>" />
-	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
+
+	<link rel="alternate" type="application/rss+xml" title="<?php bloginfo('name'); ?> RSS2 Feed" href="<?php bloginfo('rss2_url'); ?>">
+
+	<!-- Pingback URL -->
+	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
 
 	<!--=== TITLE ===-->
-	<title><?php bloginfo('name'); ?> <?php wp_title('-'); ?> </title>
+	<title><?php bloginfo('name'); ?><?php wp_title(' - ', true, 'left'); ?></title>
 
 	<!--=== WP_HEAD() ===-->
 	<?php wp_head(); ?>
