@@ -25,30 +25,10 @@ function mytheme_add_woocommerce_support()
 }
 add_action('after_setup_theme', 'mytheme_add_woocommerce_support');
 
-function custom_product_thumbnail()
-{
-    global $product;
-
-    // Prilagodite prikaz slike proizvoda prema vašim potrebama
-    echo '<div class="custom-product-thumbnail">';
-    custom_shop_product_gallery(); // Prikazuje podrazumevanu sliku proizvoda
-    echo '</div>';
-}
-add_action('woocommerce_template_loop_product_thumbnail', 'custom_product_thumbnail');
 
 
-function custom_before_shop_loop_content()
-{
-    // Custom HTML structure for woo-values
-    echo '<div class="woo-values">';
-    // Output WooCommerce result count and catalog ordering
-    woocommerce_result_count();
-    woocommerce_catalog_ordering();
-    echo '<div class="woocommerce-pagination">';
-    woocommerce_pagination();
-    echo '</div>';
-    echo '</div>';
-}
+
+
 
 // Remove existing hooked functions from woo-values
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
@@ -63,6 +43,18 @@ function display_quantity_in_mini_cart($item_quantity, $cart_item, $cart_item_ke
 }
 
 add_filter('woocommerce_widget_shopping_cart_item_quantity', 'display_quantity_in_mini_cart', 10, 3);
+
+
+function custom_product_thumbnail()
+{
+    global $product;
+
+    // Prilagodite prikaz slike proizvoda prema vašim potrebama
+    echo '<div class="custom-product-thumbnail">';
+    custom_shop_product_gallery(); // Prikazuje podrazumevanu sliku proizvoda
+    echo '</div>';
+}
+add_action('woocommerce_template_loop_product_thumbnail', 'custom_product_thumbnail');
 function add_category_to_product_loop()
 {
     global $post;
@@ -99,7 +91,18 @@ function add_category_to_product_loop()
 }
 
 add_action('woocommerce_before_shop_loop_item_title', 'add_category_to_product_loop', 5);
-
+function custom_before_shop_loop_content()
+{
+    // Custom HTML structure for woo-values
+    echo '<div class="woo-values">';
+    // Output WooCommerce result count and catalog ordering
+    woocommerce_result_count();
+    woocommerce_catalog_ordering();
+    echo '<div class="woocommerce-pagination">';
+    woocommerce_pagination();
+    echo '</div>';
+    echo '</div>';
+}
 function display_sale_percentage()
 {
     global $product;
