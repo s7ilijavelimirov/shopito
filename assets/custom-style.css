@@ -41,7 +41,7 @@
     height: auto;
   }
   .custom-product-thumbnail img {
-    max-height: 50px;
+    /* max-height: 50px; */
     width: auto;
     margin: 0 auto;
     height: auto;
