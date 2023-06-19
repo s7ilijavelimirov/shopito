@@ -60,3 +60,32 @@ div#carouselExampleFade {
         border: 1px solid #cab1ca;
     }
 }
+div#features{
+    .custom-product-slider-inner{
+        .custom-product-item {
+            flex: 0 0 33.3%;
+            display: flex;
+            padding: 0 10px; /* Adjust as needed */
+            box-sizing: border-box;
+          }
+    }
+}
+.custom-product-slider-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.custom-product-slider-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.custom-product-slider-dots .dot.active {
+    background-color: #555;
+}

@@ -181,6 +181,90 @@ jQuery(document).ready(function ($) {
 
         productLink.attr('href', productUrl);
     });
-    
+
+
+
+    // CUSTOM SLIDER
+
+
+
+    var sliders = $('.custom-product-slider');
+
+    sliders.each(function (index) {
+        var slider = $(this);
+        var sliderInner = slider.find('.custom-product-slider-inner');
+        var items = sliderInner.find('.custom-product-item');
+        var visibleItems = slider.data('visible-items');
+        var itemWidth = 100 / visibleItems;
+
+        var currentIndex = 0;
+
+        // Set initial width for items
+        items.css('width', itemWidth + '%');
+
+        // Update controls state
+        function updateControlsState() {
+            slider.find('.custom-product-slider-prev').toggleClass('disabled', currentIndex === 0);
+            slider.find('.custom-product-slider-next').toggleClass('disabled', currentIndex >= items.length - visibleItems);
+        }
+
+        // Slide to the next item
+        function slideNext() {
+            if (currentIndex < items.length - visibleItems) {
+                currentIndex++;
+                sliderInner.css('transform', 'translateX(' + (-currentIndex * itemWidth) + '%)');
+                updateControlsState();
+                updateDotsState();
+            }
+        }
+
+        // Slide to the previous item
+        function slidePrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                sliderInner.css('transform', 'translateX(' + (-currentIndex * itemWidth) + '%)');
+                updateControlsState();
+                updateDotsState();
+            }
+        }
+
+        // Attach click event to next button
+        slider.on('click', '.custom-product-slider-next', slideNext);
+
+        // Attach click event to previous button
+        slider.on('click', '.custom-product-slider-prev', slidePrev);
+
+        // Generate dots
+        var dotsContainer = slider.find('.custom-product-slider-dots');
+
+        for (var i = 0; i < items.length - visibleItems + 1; i++) {
+            var dot = $('<span>').addClass('dot').data('index', i);
+
+            if (i === currentIndex) {
+                dot.addClass('active');
+            }
+
+            dotsContainer.append(dot);
+        }
+
+        // Update dots state
+        function updateDotsState() {
+            dotsContainer.find('.dot').removeClass('active');
+            dotsContainer.find('.dot').eq(currentIndex).addClass('active');
+        }
+
+        // Attach click event to dots
+        dotsContainer.on('click', '.dot', function () {
+            var dotIndex = $(this).data('index');
+            currentIndex = dotIndex;
+            sliderInner.css('transform', 'translateX(' + (-currentIndex * itemWidth) + '%)');
+            updateControlsState();
+            updateDotsState();
+        });
+
+        // Initial controls state
+        updateControlsState();
+    });
+
 });
 
