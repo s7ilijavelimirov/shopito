@@ -60,14 +60,38 @@ div#carouselExampleFade {
         border: 1px solid #cab1ca;
     }
 }
-div#features{
-    .custom-product-slider-inner{
+div#features {
+    max-width: 960px;
+    margin: 0 auto;
+    .custom-product-slider-inner {
         .custom-product-item {
             flex: 0 0 33.3%;
             display: flex;
-            padding: 0 10px; /* Adjust as needed */
+            position: relative;
+            padding: 0 15px; /* Adjust as needed */
             box-sizing: border-box;
-          }
+            &:first-of-type {
+                padding-left: 0px;
+            }
+            &:last-of-type {
+                padding-right: 0px;
+            }
+            a {
+                background-color: transparent !important;
+            }
+        }
+    }
+    .custom-product-slider-controls {
+        button.custom-product-slider-prev.disabled,
+        button.custom-product-slider-next.disabled {
+            visibility: hidden;
+        }
+        button.custom-product-slider-prev,
+        button.custom-product-slider-next {
+            border: 1px solid silver;
+            margin-right: 0px;
+            margin-left: 0px;
+        }
     }
 }
 .custom-product-slider-dots {
@@ -77,15 +101,15 @@ div#features{
 }
 
 .custom-product-slider-dots .dot {
-    width: 10px;
+    width: 70px;
     height: 10px;
-    border-radius: 50%;
-    background-color: #bbb;
+    border-radius: 100px;
+    background-color: $unnamed-color-f0efef;
     margin: 0 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .custom-product-slider-dots .dot.active {
-    background-color: #555;
+    background-color: $unnamed-color-cab1ca;
 }
