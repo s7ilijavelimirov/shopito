@@ -69,6 +69,11 @@ endif;
                         $sale_price = get_post_meta($product->ID, '_sale_price', true);
                         $currency_symbol = get_woocommerce_currency_symbol();
                         $sku = get_post_meta($product->ID, '_sku', true);
+                        $sale_percentage1 = '';
+                        if ($regular_price && $sale_price) {
+                            $percentage = round((($regular_price - $sale_price) / $regular_price) * 100);
+                            $sale_percentage1 = '<div class="procentage">' . esc_html($percentage . '%') . '</div>';
+                        }
                 ?>
                         <div class="custom-product-item">
                             <a href="<?php echo esc_url($product_permalink); ?>">
@@ -151,9 +156,7 @@ endif;
                                     <h4 class="product-title"><?php echo $product_title; ?></h4>
                                     <div class="product-details">
                                         <h4 class="product-title"><?php echo $title; ?></h4>
-                                        <?php 
-                                        
-                                        
+                                        <?php
                                         if ($sku) : ?>
                                             <p class="product-sku text-center">Model: <?php echo $sku; ?></p>
                                         <?php endif; ?>
