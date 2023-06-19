@@ -113,7 +113,7 @@ function custom_product_slider_shortcode($atts)
     $query = new WP_Query($args);
     ob_start();
 ?>
-    <div id="custom-product-slider-<?php echo esc_attr($atts['category']); ?>" class="custom-product-slider">
+    <div id="custom-product-slider-<?php echo esc_attr($atts['category']); ?>" class="custom-product-slider" data-visible-items="5">
         <div class="custom-product-slider-inner">
             <?php
             $products = $query->get_posts();
@@ -127,41 +127,48 @@ function custom_product_slider_shortcode($atts)
             ?>
                 <div class="custom-product-item">
                     <a href="<?php echo esc_url($permalink); ?>">
-                    <?php
-                            $product_id = $product->ID;
-                            $brands = wp_get_post_terms($product_id, 'pwb-brand');
+                        <?php
+                        $product_id = $product->ID;
+                        $brands = wp_get_post_terms($product_id, 'pwb-brand');
 
-                            if (!empty($brands) && !is_wp_error($brands)) {
-                                echo '<div class="product-brand text-center">';
-                                foreach ($brands as $brand) {
-                                    $brand_logo_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
-                                    $brand_logo = wp_get_attachment_image($brand_logo_id, 'thumbnail');
-                                    if (!empty($brand_logo)) {
-                                        echo $brand_logo;
-                                    }
+                        if (!empty($brands) && !is_wp_error($brands)) {
+                            echo '<div class="product-brand text-center">';
+                            foreach ($brands as $brand) {
+                                $brand_logo_id = get_term_meta($brand->term_id, 'pwb_brand_image', true);
+                                $brand_logo = wp_get_attachment_image($brand_logo_id, 'thumbnail');
+                                if (!empty($brand_logo)) {
+                                    echo $brand_logo;
                                 }
-                                echo '</div>';
                             }
-                            ?>
+                            echo '</div>';
+                        }
+                        ?>
                         <?php echo custom_shop_product_gallery1($product, 'product-gallery-' . $product->ID); ?>
                         <div class="product-details">
                             <h4 class="product-title"><?php echo $title; ?></h4>
                             <?php
                             if ($sale_price) {
-                                $regular_price_html = '<del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>' . $regular_price . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span></del>';
-                                $sale_price_html = '<ins><span class="woocommerce-Price-amount amount"><bdi>' . wc_price($sale_price) . '</bdi></span></ins>';
-                                $price_html = '<p class="price mb-0">' . $regular_price_html . ' ' . $sale_price_html . '</p>';
+                                $regular_price_formatted = is_numeric($regular_price) ? number_format(floatval($regular_price), 2, '.', '') : '';
+                                $regular_price_html = $regular_price_formatted !== '' ? '<del aria-hidden="true"><span class="woocommerce-Price-amount amount"><bdi>' . $regular_price_formatted . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span></del>' : '';
+
+                                $sale_price_formatted = is_numeric($sale_price) ? number_format(floatval($sale_price), 2, '.', '') : '';
+                                $sale_price_html = $sale_price_formatted !== '' ? '<ins><span class="woocommerce-Price-amount amount"><bdi>' . $sale_price_formatted . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span></ins>' : '';
+
+                                $price_html = $regular_price_html !== '' && $sale_price_html !== '' ? '<p class="price mb-0">' . $regular_price_html . ' ' . $sale_price_html . '</p>' : '';
                             } else {
                                 if ($regular_price === '0.00') {
                                     $price_html = '<p class="price mb-0">' . $regular_price . '&nbsp;' . $currency_symbol . '</p>';
                                 } else {
-                                    $regular_price_html = '<span class="woocommerce-Price-amount amount"><bdi>' . wc_price($regular_price) . '</bdi></span>';
-                                    $price_html = '<p class="price mb-0">' . $regular_price_html . '</p>';
+                                    $regular_price_formatted = is_numeric($regular_price) ? number_format(floatval($regular_price), 2, '.', '') : '';
+                                    $regular_price_html = $regular_price_formatted !== '' ? '<span class="woocommerce-Price-amount amount"><bdi>' . $regular_price_formatted . '&nbsp;<span class="woocommerce-Price-currencySymbol">' . $currency_symbol . '</span></bdi></span>' : '';
+
+                                    $price_html = $regular_price_html !== '' ? '<p class="price mb-0">' . $regular_price_html . '</p>' : '';
                                 }
                             }
 
                             echo $price_html;
                             ?>
+
                         </div>
                     </a>
                 </div>
