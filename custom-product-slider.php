@@ -175,8 +175,8 @@ function custom_product_slider_shortcode($atts)
             <?php } ?>
         </div>
         <div class="custom-product-slider-controls">
-            <button class="custom-product-slider-prev">&#10094;</button>
-            <button class="custom-product-slider-next">&#10095;</button>
+            <button class="custom-product-slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="custom-product-slider-next"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </div>
 <?php
