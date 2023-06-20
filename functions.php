@@ -279,3 +279,14 @@ function custom_pwb_brands_in_loop() {
         echo '<a href="' . get_term_link($brand_id, 'pwb-brand') . '"><img src="' . esc_url($image_url) . '" alt="Brand Image"></a>';
     }
 }
+// Display variations as separate products on the shop page
+function display_variations_as_products_on_shop_page($q)
+{
+    if (is_shop()) {
+        $q->set('post_type', array('product', 'product_variation'));
+    }
+}
+add_action('woocommerce_product_query', 'display_variations_as_products_on_shop_page');
+
+
+
