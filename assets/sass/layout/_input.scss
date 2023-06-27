@@ -10,11 +10,3 @@
         }
     }
 }
-.woocommerce-product-details__short-description {
-    ul > li::marker {
-        content: ">"; /* Postavljanje željenog znaka kao marker */
-        color: black; /* Boja markera */
-        font-size: 26px; /* Veličina fonta markera */
-        /* Ostale stilizacije markera */
-    }
-}

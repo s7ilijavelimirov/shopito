@@ -265,6 +265,6 @@ jQuery(document).ready(function ($) {
         // Initial controls state
         updateControlsState();
     });
-
+   
 });
 
