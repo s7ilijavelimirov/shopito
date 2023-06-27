@@ -25,11 +25,6 @@ function mytheme_add_woocommerce_support()
 }
 add_action('after_setup_theme', 'mytheme_add_woocommerce_support');
 
-
-
-
-
-
 // Remove existing hooked functions from woo-values
 remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30);
@@ -57,10 +52,10 @@ function custom_product_thumbnail()
 add_action('woocommerce_template_loop_product_thumbnail', 'custom_product_thumbnail');
 function add_category_to_product_loop()
 {
-    global $post;
+    global $product;
 
     // Get product categories.
-    $terms = wp_get_post_terms($post->ID, 'product_cat');
+    $terms = wp_get_post_terms($product->get_id(), 'product_cat');
 
     $category_links = array();
 
@@ -255,38 +250,101 @@ function quadlayers_new_product_badge()
         echo '<span class="itsnew onsale">' . esc_html__('NOVO', 'woocommerce') . '</span>';
     }
 }
-function modify_pwb_brands_in_loop_hook() {
-    // Remove the original hook
-    remove_action('woocommerce_after_shop_loop_item_title', 'pwb_brands_in_loop');
+// function custom_pwb_brands_in_loop() {
+//     // Custom logic for brands in the loop
+//     global $product;
 
-    // Add the modified hook
-    add_action('woocommerce_after_shop_loop_item_title', 'custom_pwb_brands_in_loop');
-}
-add_action('woocommerce_before_shop_loop', 'modify_pwb_brands_in_loop_hook');
+//     // Get the brand ID for the product
+//     $brand_id = get_post_meta($product->get_id(), '_brand', true);
 
-function custom_pwb_brands_in_loop() {
-    // Custom logic for brands in the loop
-    global $product;
+//     // Get the brand image URL
+//     $image_url = wp_get_attachment_image_url(get_term_meta($brand_id, 'pwb_brand_image_id', true), 'thumbnail');
 
-    // Get the brand ID for the product
-    $brand_id = get_post_meta($product->get_id(), '_brand', true);
-
-    // Get the brand image URL
-    $image_url = wp_get_attachment_image_url(get_term_meta($brand_id, 'pwb_brand_image_id', true), 'thumbnail');
-
-    if (!empty($image_url)) {
-        // Output the brand image with a link to the brand archive
-        echo '<a href="' . get_term_link($brand_id, 'pwb-brand') . '"><img src="' . esc_url($image_url) . '" alt="Brand Image"></a>';
-    }
-}
-// Display variations as separate products on the shop page
+//     if (!empty($image_url)) {
+//         // Output the brand image with a link to the brand archive
+//         echo '<a href="' . get_term_link($brand_id, 'pwb-brand') . '"><img src="' . esc_url($image_url) . '" alt="Brand Image"></a>';
+//     }
+// }
 function display_variations_as_products_on_shop_page($q)
 {
-    if (is_shop()) {
-        $q->set('post_type', array('product', 'product_variation'));
+    if (is_shop() || is_product_category()) {
+        $q->set('post_type', array('product', 'product_variation', 'pwb-brand'));
     }
 }
 add_action('woocommerce_product_query', 'display_variations_as_products_on_shop_page');
 
+function display_brand_image_on_variable_product()
+{
+    global $product;
 
+    // Check if the product is a variable product
+    if ($product && $product->is_type('variable')) {
+        $parent_id    = $product->get_parent_id();
+        $brand_id     = get_post_meta($parent_id, '_brand', true);
+        $brand_image  = wp_get_attachment_image($brand_id, 'thumbnail');
 
+        // Display the brand image if available
+        if (!empty($brand_image)) {
+            echo '<div class="brand-image">' . $brand_image . '</div>';
+        }
+    }
+}
+
+// add_filter('allow_empty_comment', '__return_true');
+// add_action('woocommerce_after_shop_loop_item', 'get_star_rating' );
+// function get_star_rating()
+// {
+//     global $woocommerce, $product;
+//     $average = $product->get_average_rating();
+
+//     echo '<div class="star-rating"><span style="width:'.( ( $average / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$average.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>';
+// }
+function modify_woocommerce_single_product_summary()
+{
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 15);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50);
+
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 15);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 30);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 40);
+}
+
+add_action('init', 'modify_woocommerce_single_product_summary');
+function display_product_rating_stars()
+{
+    global $product;
+
+    if ($product->get_average_rating()) {
+        echo '<div class="star-rating" role="img" aria-label="Rated ' . $product->get_average_rating() . ' out of 5">';
+        echo wc_get_rating_html($product->get_average_rating());
+        echo '</div>';
+    } else {
+        echo '<div class="star-rating" role="img" aria-label="Not Rated Yet">';
+        echo wc_get_rating_html(0);
+        echo '</div>';
+    }
+}
+
+add_action('woocommerce_before_shop_loop_item_title', 'display_product_rating_stars', 5);
+add_action('woocommerce_single_product_summary', 'display_product_rating_stars', 5);
+// function display_product_rating_stars() {
+//     global $product;
+
+//     if ( $product->get_average_rating() ) {
+//         echo '<div class="star-rating" role="img" aria-label="Rated ' . $product->get_average_rating() . ' out of 5">';
+//         echo wc_get_rating_html( $product->get_average_rating() );
+//         echo '</div>';
+//     } else {
+//         echo '<div class="star-rating" role="img" aria-label="Not Rated Yet">';
+//         echo wc_get_rating_html( 0 );
+//         echo '</div>';
+//     }
+// }
+// add_action( 'woocommerce_single_product_summary', 'display_product_rating_stars', 25 );

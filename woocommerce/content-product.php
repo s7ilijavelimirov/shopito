@@ -40,6 +40,9 @@ if (empty($product) || !$product->is_visible()) {
 	 * @hooked woocommerce_show_product_loop_sale_flash - 10
 	 * @hooked custom_product_thumbnail - 5
 	 */
+
+
+
 	if ($product->get_gallery_image_ids()) {
 		display_sale_percentage();
 		echo '<div class="content-product">';
@@ -49,26 +52,40 @@ if (empty($product) || !$product->is_visible()) {
 		do_action('woocommerce_shop_loop_item_title');
 		//echo display_new_product_alert(); // Assuming you have a function named 'display_new_product_alert'
 		echo '</a>';
+		
 		echo '</div>';
+		echo display_brand_image_on_variable_product();
 		echo '<div class="content-action">';
+		
 		do_action('woocommerce_after_shop_loop_item_title');
 		do_action('woocommerce_after_shop_loop_item');
 		echo '</div>';
 	} else {
 		display_sale_percentage();
-		
 		echo '<div class="content-product">';
 		do_action('woocommerce_before_shop_loop_item_title');
 		echo '<a href="' . esc_url(get_permalink($product->get_id())) . '">';
 		do_action('woocommerce_shop_loop_item_title');
-		//echo display_new_product_alert(); // Assuming you have a function named 'display_new_product_alert'
 		echo '</a>';
+		
+		if ( $product->is_type( 'variable' ) ) {
+			$brand_id    = get_post_meta( $product->get_id(), 'pwb_brand', true );
+			$brand_image = wp_get_attachment_image( $brand_id, 'thumbnail' );
+
+			// Display the brand image if available
+			if ( ! empty( $brand_image ) ) {
+				echo '<div class="brand-image">' . $brand_image . '</div>';
+			}
+		}
+		
 		echo '</div>';
 		echo '<div class="content-action">';
+		
 		do_action('woocommerce_after_shop_loop_item_title');
 		do_action('woocommerce_after_shop_loop_item');
 		echo '</div>';
 	}
+
 	/**
 	 * Hook: woocommerce_shop_loop_item_title.
 	 *
