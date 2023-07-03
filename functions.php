@@ -290,30 +290,25 @@ function display_brand_image_on_variable_product()
     }
 }
 
-// add_filter('allow_empty_comment', '__return_true');
-// add_action('woocommerce_after_shop_loop_item', 'get_star_rating' );
-// function get_star_rating()
-// {
-//     global $woocommerce, $product;
-//     $average = $product->get_average_rating();
-
-//     echo '<div class="star-rating"><span style="width:'.( ( $average / 5 ) * 100 ) . '%"><strong itemprop="ratingValue" class="rating">'.$average.'</strong> '.__( 'out of 5', 'woocommerce' ).'</span></div>';
-// }
+function dodaj_ocena_proizvoda() {
+    echo '<span>Ocena proizvoda:</span><div class="star-rating" role="img" aria-label="Not Rated Yet"></div>';
+}
+add_action('woocommerce_single_product_rating', 'dodaj_ocena_proizvoda', 5);
 function modify_woocommerce_single_product_summary()
 {
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
-    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 15);
-    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
-    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40); 
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 50);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30);
 
     add_action('woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 19);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 10);
     add_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 15);
-    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10);
-    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
-    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 30);
-    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_sharing', 40);
+    add_action('woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 20);
 }
 
 add_action('init', 'modify_woocommerce_single_product_summary');
@@ -321,6 +316,14 @@ function display_product_rating_stars()
 {
     global $product;
 
+    // Provera da li je recenzija već dodata za proizvod
+    $rating_count = $product->get_rating_count();
+    if ($rating_count > 0) {
+        return; // Prikaz zvezdica je već dodat, izlaz iz funkcije
+    }
+
+    // Prikaz zvezdica ukoliko nema recenzija
+    echo '<span class="small-title">Ocena proizvoda:</span>';
     if ($product->get_average_rating()) {
         echo '<div class="star-rating" role="img" aria-label="Rated ' . $product->get_average_rating() . ' out of 5">';
         echo wc_get_rating_html($product->get_average_rating());
@@ -332,19 +335,13 @@ function display_product_rating_stars()
     }
 }
 
-add_action('woocommerce_before_shop_loop_item_title', 'display_product_rating_stars', 5);
-add_action('woocommerce_single_product_summary', 'display_product_rating_stars', 5);
-// function display_product_rating_stars() {
-//     global $product;
+add_action('woocommerce_single_product_summary', 'display_product_rating_stars', 11);
 
-//     if ( $product->get_average_rating() ) {
-//         echo '<div class="star-rating" role="img" aria-label="Rated ' . $product->get_average_rating() . ' out of 5">';
-//         echo wc_get_rating_html( $product->get_average_rating() );
-//         echo '</div>';
-//     } else {
-//         echo '<div class="star-rating" role="img" aria-label="Not Rated Yet">';
-//         echo wc_get_rating_html( 0 );
-//         echo '</div>';
-//     }
-// }
-// add_action( 'woocommerce_single_product_summary', 'display_product_rating_stars', 25 );
+function add_custom_text_to_variation_product()
+{
+    echo '<div class="custom-text">Cena:</div>';
+}
+
+add_action('woocommerce_single_variation', 'add_custom_text_to_variation_product', 5);
+
+
