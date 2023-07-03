@@ -345,25 +345,27 @@ ul.shop-view-switcher {
 .summary.entry-summary {
     h1.product_title.entry-title {
         font-weight: 600;
+        line-height: 58px;
+        margin-bottom: 10px;
     }
 }
 
-.comment-form-rating{
-    p.stars{
-        &:first-of-type{
-            display: none;
-        }
-    }
+.comment-form-rating {
+    // p.stars {
+    //     &:first-of-type {
+    //         display: none;
+    //     }
+    // }
 }
 body.woocommerce .star-rating span::before {
     content: "SSSSS" !important;
     color: #e0b22f !important;
-  }
-  
-  .woocommerce .star-rating span{
-  font-family:star !important;
-  }
-  
-  .star-rating::before {
-      color: #e0b22f;
-  }
+}
+
+.woocommerce .star-rating span {
+    font-family: star !important;
+}
+
+.star-rating::before {
+    color: #e0b22f;
+}
